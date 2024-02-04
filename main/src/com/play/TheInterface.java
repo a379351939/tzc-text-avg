@@ -1,28 +1,34 @@
 package com.play;
 
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class TheInterface {
-    public static void main(String[] args){
-        System.out.println("the Interface");
-        run();
+    private Map<String, String> sceneMap;
+    private Map<String, Map<String,String>> nextSceneMap;
+
+    public TheInterface(Map<String, String> sceneMap, Map<String, Map<String,String>> nextSceneMap) {
+        this.sceneMap = sceneMap;
+        this.nextSceneMap = nextSceneMap;
+
+        run("begin");
     }
-    private static void run(){
+
+    private void run(String key){
+        System.out.println(sceneMap.get(key));
+
         Scanner sc = new Scanner(System.in);
         String line = sc.nextLine();
 
-        switch (line) {
-            case "1":
-                run();
-                break;
-            case "2":
-                run();
-                break;
-            case "5":
-                System.exit(0);
-                break;
+        String nextSceneKey = nextSceneMap.get(key) != null ? nextSceneMap.get(key).get(line) : null;
 
+        // 判断值是否为 null，如果是，则退出程序
+        if (nextSceneKey == null) {
+            System.out.println("Value not found. Exiting program.");
+            System.exit(0);
+        } else {
+            run(nextSceneKey);
         }
     }
 
