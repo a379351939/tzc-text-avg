@@ -8,11 +8,11 @@ public class TheInterface {
     private Map<String, String> sceneMap;
     private Map<String, Map<String,String>> nextSceneMap;
 
-    public TheInterface(Map<String, String> sceneMap, Map<String, Map<String,String>> nextSceneMap) {
+    public TheInterface(Map<String, String> sceneMap, Map<String, Map<String,String>> nextSceneMap, String firstSc) {
         this.sceneMap = sceneMap;
         this.nextSceneMap = nextSceneMap;
 
-        run("begin");
+        run(firstSc);
     }
 
     private void run(String key){
@@ -25,7 +25,7 @@ public class TheInterface {
 
         // 判断值是否为 null，如果是，则退出程序
         if (nextSceneKey == null) {
-            System.out.println("Value not found. Exiting program.");
+            System.out.println("程序不知道你想干啥，游戏结束");
             System.exit(0);
         } else {
             run(nextSceneKey);
